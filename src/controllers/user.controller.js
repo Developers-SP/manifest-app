@@ -1,5 +1,4 @@
 const userService = require('../services/user.service')
-, md5 = require('md5')
 , httpStatus = require('http-status-codes')
 , UserModel = require('../models/user.model');
 
@@ -11,7 +10,7 @@ class userController {
     login(req, res) {
         userService.prototype.findOne(req.body.email)
             .then(user => {
-                if(user != undefined && user.password == md5(req.body.password)){
+                if(user != undefined && user.password == req.body.password){
                     res.status(httpStatus.OK).send(user);
                 }else{
                     res.status(httpStatus.UNAUTHORIZED).send('Usuário e/ou senha incorretos');
@@ -32,7 +31,6 @@ class userController {
     }
 
     insert(req, res) {
-        req.body.password = md5(req.body.password);
         userService.prototype.insert(new UserModel(req.body))
             .then( _ => {
                 res.status(httpStatus.OK).send('Usuário incluido com sucesso');

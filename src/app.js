@@ -2,7 +2,8 @@ const express = require('express')
 , app = express()
 , http = require('http')
 , parser = require('./parser')
-, routes = require('./routes');
+, routes = require('./routes')
+, middlewares = require('./middlewares');
 const {
   mode
   , host
@@ -10,6 +11,7 @@ const {
 } = require('./environments');
 
 function start(){
+  middlewares(app);
   parser(app);
   routes(app);
   const server = http.createServer(app);
