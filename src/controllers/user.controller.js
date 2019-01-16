@@ -32,6 +32,7 @@ class userController {
     }
 
     insert(req, res) {
+        req.body.password = md5(req.body.password);
         userService.prototype.insert(new UserModel(req.body))
             .then( _ => {
                 res.status(httpStatus.OK).send('Usuário incluido com sucesso');
