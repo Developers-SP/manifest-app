@@ -1,6 +1,5 @@
-const db = require('../connections/db.connection');
-const UserModel = require('../models/user.model');
-const Sequelize = require('sequelize');
+const db = require('../connections/db.connection')
+, Sequelize = require('sequelize');
 
 const userService = db.instance
     .define('user',
@@ -18,13 +17,11 @@ const userService = db.instance
             password: {
                 type: Sequelize.STRING,
                 allowNull: false,
-            },
-            createAt: Sequelize.DATE,
-            updateAt: Sequelize.DATE
+            }
         }
     );
 
-userService.prototype.isUnique = (email) => {
+userService.prototype.findOne = (email) => {
     return userService.findOne({
         where: {email}
     });
@@ -32,6 +29,10 @@ userService.prototype.isUnique = (email) => {
 
 userService.prototype.findAll = _ => {
     return userService.findAll();    
+}
+
+userService.prototype.insert = user => {
+    return userService.upsert(user);    
 }
 
 module.exports = userService;

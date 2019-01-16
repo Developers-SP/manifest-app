@@ -1,8 +1,7 @@
 class UserModel {
-    constructor(){
-        this.id = undefined;
-        this.username = '';
-        this.password = '';
+    constructor(user){
+        this.email = user.email || undefined;
+        this.password = user.password || undefined;
     }
 }
 module.exports = UserModel;
