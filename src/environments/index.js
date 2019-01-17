@@ -11,5 +11,4 @@ if (mode) {
 } else {
   environment	= Object.assign(develop, production);
 }
-
 module.exports = Object.freeze(environment);
