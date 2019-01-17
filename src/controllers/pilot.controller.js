@@ -7,6 +7,16 @@ class PilotController {
         pilotService.sync();
     }
 
+    findByRegistry(req, res) {
+        pilotService.prototype.findByRegistry(req.body.registry)
+            .then(pilot => {
+                res.status(httpStatus.OK).send(pilot);
+            }).catch((err) => {
+                res.status(httpStatus.SERVICE_UNAVAILABLE).send(err);
+            });
+    }
+
+
     findAll(req, res) {
         pilotService.prototype.findAll()
             .then(pilots => {
