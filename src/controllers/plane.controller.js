@@ -7,8 +7,8 @@ class PlaneController {
         planeService.sync();
     }
 
-    findByPrefix(req, res) {
-        planeService.prototype.findByPrefix(req.body.prefix)
+    async findByPrefix(req, res) {
+        await planeService.prototype.findByPrefix(req.body.prefix)
             .then(plane => {
                 res.status(httpStatus.OK).send(plane);
             }).catch((err) => {
@@ -17,8 +17,8 @@ class PlaneController {
             });
     }
 
-    findAll(req, res) {
-        planeService.prototype.findAll()
+    async findAll(req, res) {
+        await planeService.prototype.findAll()
             .then(planes => {
                 res.status(httpStatus.OK).send(planes);
             }).catch((err) => {
@@ -26,8 +26,8 @@ class PlaneController {
             });
     }
 
-    insert(req, res) {
-        planeService.prototype.insert(new PlaneModel(req.body))
+    async insert(req, res) {
+        await planeService.prototype.insert(new PlaneModel(req.body))
             .then( _ => {
                 res.status(httpStatus.OK).send('Avião incluido com sucesso');
             }).catch((err) => {
@@ -35,8 +35,8 @@ class PlaneController {
             });
     }
 
-    update(req, res) {
-        planeService.prototype.update(new PlaneModel(req.body))
+    async update(req, res) {
+        await planeService.prototype.update(new PlaneModel(req.body))
             .then( _ => {
                 res.status(httpStatus.OK).send('Avião atualizado com sucesso');
             }).catch((err) => {

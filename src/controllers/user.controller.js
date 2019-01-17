@@ -8,8 +8,8 @@ class userController {
         userService.sync();
     }
   
-    login(req, res) {
-        userService.prototype.findByEmail(req.body.email)
+    async login(req, res) {
+       await userService.prototype.findByEmail(req.body.email)
             .then(user => {
                 crypt.password(req.body.password).
                     then(passwordCrypt =>{
@@ -28,8 +28,8 @@ class userController {
             });
     }
 
-    findAll(req, res) {
-        userService.prototype.findAll()
+    async findAll(req, res) {
+        await userService.prototype.findAll()
             .then(users => {
                 res.status(httpStatus.OK).send(users);
             }).catch((err) => {
@@ -37,8 +37,8 @@ class userController {
             });
     }
 
-    insert(req, res) {
-        userService.prototype.insert(new UserModel(req.body))
+    async insert(req, res) {
+        await userService.prototype.insert(new UserModel(req.body))
             .then( _ => {
                 res.status(httpStatus.OK).send('Usuário incluido com sucesso');
             }).catch((err) => {
@@ -46,8 +46,8 @@ class userController {
             });
     }
 
-    update(req, res) {
-        userService.prototype.update(new UserModel(req.body))
+    async update(req, res) {
+        await userService.prototype.update(new UserModel(req.body))
             .then( _ => {
                 res.status(httpStatus.OK).send('Usuário atualizado com sucesso');
             }).catch((err) => {

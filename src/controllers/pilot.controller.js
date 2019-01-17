@@ -7,8 +7,8 @@ class PilotController {
         pilotService.sync();
     }
 
-    findByRegistry(req, res) {
-        pilotService.prototype.findByRegistry(req.body.registry)
+    async findByRegistry(req, res) {
+        await pilotService.prototype.findByRegistry(req.body.registry)
             .then(pilot => {
                 res.status(httpStatus.OK).send(pilot);
             }).catch((err) => {
@@ -17,8 +17,8 @@ class PilotController {
     }
 
 
-    findAll(req, res) {
-        pilotService.prototype.findAll()
+    async findAll(req, res) {
+        await pilotService.prototype.findAll()
             .then(pilots => {
                 res.status(httpStatus.OK).send(pilots);
             }).catch((err) => {
@@ -26,8 +26,8 @@ class PilotController {
             });
     }
 
-    insert(req, res) {
-        pilotService.prototype.insert(new PilotModel(req.body))
+    async insert(req, res) {
+        await pilotService.prototype.insert(new PilotModel(req.body))
             .then( _ => {
                 res.status(httpStatus.OK).send('Piloto incluido com sucesso');
             }).catch((err) => {
@@ -35,8 +35,8 @@ class PilotController {
             });
     }
 
-    update(req, res) {
-        pilotService.prototype.update(new PilotModel(req.body))
+    async update(req, res) {
+        await pilotService.prototype.update(new PilotModel(req.body))
             .then( _ => {
                 res.status(httpStatus.OK).send('Piloto atualizado com sucesso');
             }).catch((err) => {

@@ -7,8 +7,8 @@ class ManifestController {
         manifestService.sync();
     }
 
-    findById(req, res) {
-        manifestService.prototype.findById(req.body.id)
+    async findById(req, res) {
+        await manifestService.prototype.findById(req.body.id)
             .then(manifest => {
                 res.status(httpStatus.OK).send(manifest);
             }).catch((err) => {
@@ -17,8 +17,8 @@ class ManifestController {
     }
 
 
-    findAll(req, res) {
-        manifestService.prototype.findAll()
+    async findAll(req, res) {
+        await manifestService.prototype.findAll()
             .then(manifests => {
                 res.status(httpStatus.OK).send(manifests);
             }).catch((err) => {
@@ -26,8 +26,8 @@ class ManifestController {
             });
     }
 
-    insert(req, res) {
-        manifestService.prototype.insert(new ManifestModel(req.body))
+    async insert(req, res) {
+        await manifestService.prototype.insert(new ManifestModel(req.body))
             .then( _ => {
                 res.status(httpStatus.OK).send('Manifesto incluido com sucesso');
             }).catch((err) => {
@@ -35,8 +35,8 @@ class ManifestController {
             });
     }
 
-    update(req, res) {
-        manifestService.prototype.update(new ManifestModel(req.body))
+    async update(req, res) {
+        await manifestService.prototype.update(new ManifestModel(req.body))
             .then( _ => {
                 res.status(httpStatus.OK).send('Manifesto atualizado com sucesso');
             }).catch((err) => {

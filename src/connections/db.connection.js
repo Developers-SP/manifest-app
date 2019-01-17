@@ -15,7 +15,6 @@ const {
 class DbConnection {
 
     constructor(){
-        console.log("oi  " + db_dialect);
         this.instance = new Sequelize(db_name, db_user, db_pass, {
             host: db_host,
             dialect: db_dialect,
