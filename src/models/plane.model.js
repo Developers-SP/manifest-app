@@ -20,7 +20,8 @@ class PlaneModel {
             },
             prefix: {
                 type: Sequelize.INTEGER,
-                unique: true
+                unique: true,
+                allowNull: false
             },
             name: {
                 type: Sequelize.STRING,
