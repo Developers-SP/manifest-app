@@ -7,6 +7,15 @@ class PlaneController {
         planeService.sync();
     }
 
+    findByPrefix(req, res) {
+        planeService.prototype.findByPrefix(req.body.prefix)
+            .then(plane => {
+                res.status(httpStatus.OK).send(plane);
+            }).catch((err) => {
+                res.status(httpStatus.SERVICE_UNAVAILABLE).send(err);
+            });
+    }
+
     findAll(req, res) {
         planeService.prototype.findAll()
             .then(planes => {
