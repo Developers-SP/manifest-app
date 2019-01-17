@@ -13,6 +13,7 @@ class PlaneController {
                 res.status(httpStatus.OK).send(plane);
             }).catch((err) => {
                 res.status(httpStatus.SERVICE_UNAVAILABLE).send(err);
+                
             });
     }
 
