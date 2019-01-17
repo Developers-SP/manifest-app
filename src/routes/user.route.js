@@ -4,7 +4,7 @@ const urlController = require('../controllers/user.controller')
 
 router.post('/login', urlController.login);
 router.get('/find-all', urlController.findAll);
-router.put('/insert', urlController.insert);
-
+router.post('/insert', urlController.insert);
+router.put('/update', urlController.update);
 
 module.exports = router;
