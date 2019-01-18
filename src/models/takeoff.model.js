@@ -1,13 +1,13 @@
 const validation = require('../utils/field.validation')
 , Sequelize = require('sequelize');
 
-class ManifestModel {
-    constructor(manifest){
-        console.log(manifest);
-        this.id = validation.undefinedOrHimself(manifest, "id");
-        this.planeId = validation.undefinedOrHimself(manifest, "planeId");
-        this.pilotId = validation.undefinedOrHimself(manifest, "pilotId");
-        this.time = validation.undefinedOrHimself(manifest, "time");
+class TakeoffModel {
+    constructor(takeoff){
+        console.log(takeoff);
+        this.id = validation.undefinedOrHimself(takeoff, "id");
+        this.planeId = validation.undefinedOrHimself(takeoff, "planeId");
+        this.pilotId = validation.undefinedOrHimself(takeoff, "pilotId");
+        this.time = validation.undefinedOrHimself(takeoff, "time");
     }
 
     defineEntityStructure(){
@@ -30,4 +30,4 @@ class ManifestModel {
         };
     }
 }
-module.exports = ManifestModel;
+module.exports = TakeoffModel;

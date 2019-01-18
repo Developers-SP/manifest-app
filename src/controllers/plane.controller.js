@@ -8,7 +8,7 @@ class PlaneController {
     }
 
     async findByPrefix(req, res) {
-        await planeService.prototype.findByPrefix(req.body.prefix)
+        await planeService.prototype.findByPrefix(req.params.prefix)
             .then(plane => {
                 res.status(httpStatus.OK).send(plane);
             }).catch((err) => {

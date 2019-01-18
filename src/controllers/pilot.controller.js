@@ -8,7 +8,7 @@ class PilotController {
     }
 
     async findByRegistry(req, res) {
-        await pilotService.prototype.findByRegistry(req.body.registry)
+        await pilotService.prototype.findByRegistry(req.params.registry)
             .then(pilot => {
                 res.status(httpStatus.OK).send(pilot);
             }).catch((err) => {

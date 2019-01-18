@@ -1,14 +1,14 @@
-const manifestService = require('../services/manifest.service')
+const takeoffService = require('../services/takeoff.service')
 , httpStatus = require('http-status-codes')
-, ManifestModel = require('../models/manifest.model');
+, TakeoffModel = require('../models/takeoff.model');
 
-class ManifestController {
+class TakeoffController {
     constructor() { 
-        manifestService.sync();
+        takeoffService.sync();
     }
 
     async findById(req, res) {
-        await manifestService.prototype.findById(req.body.id)
+        await takeoffService.prototype.findById(req.params.id)
             .then(manifest => {
                 res.status(httpStatus.OK).send(manifest);
             }).catch((err) => {
@@ -18,7 +18,7 @@ class ManifestController {
 
 
     async findAll(req, res) {
-        await manifestService.prototype.findAll()
+        await takeoffService.prototype.findAll()
             .then(manifests => {
                 res.status(httpStatus.OK).send(manifests);
             }).catch((err) => {
@@ -27,22 +27,22 @@ class ManifestController {
     }
 
     async insert(req, res) {
-        await manifestService.prototype.insert(new ManifestModel(req.body))
+        await takeoffService.prototype.insert(new TakeoffModel(req.body))
             .then( _ => {
-                res.status(httpStatus.OK).send('Manifesto incluido com sucesso');
+                res.status(httpStatus.OK).send('decolagem incluido com sucesso');
             }).catch((err) => {
                 res.status(httpStatus.SERVICE_UNAVAILABLE).send(err);
             });
     }
 
     async update(req, res) {
-        await manifestService.prototype.update(new ManifestModel(req.body))
+        await takeoffService.prototype.update(new TakeoffModel(req.body))
             .then( _ => {
-                res.status(httpStatus.OK).send('Manifesto atualizado com sucesso');
+                res.status(httpStatus.OK).send('decolagem atualizada com sucesso');
             }).catch((err) => {
                 res.status(httpStatus.SERVICE_UNAVAILABLE).send(err);
             });
     }
 }
   
-module.exports = new ManifestController();
+module.exports = new TakeoffController();

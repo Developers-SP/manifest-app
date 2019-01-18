@@ -9,7 +9,7 @@ class userController {
     }
   
     async login(req, res) {
-       await userService.prototype.findByEmail(req.body.email)
+       await userService.prototype.findByEmail(req.params.email)
             .then(user => {
                 crypt.password(req.body.password).
                     then(passwordCrypt =>{
