@@ -21,9 +21,6 @@ class PilotService{
     update(pilot){
         return db.pilot.update(pilot, {where : {id : pilot.id}}, { multi: true });    
     }
-
 }
-
-
 
 module.exports = new PilotService;
