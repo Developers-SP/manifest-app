@@ -1,27 +1,25 @@
-const db = require('../connections/db.connection')
-, AthleteModel = require('../models/athlete.model');
+const db = require('../connections/db.connection');
 
-const athleteService = db.instance
-    .define('athlete',
-        new AthleteModel().defineEntityStructure()
-    );
+class AthleteService{
 
-athleteService.prototype.findById = (id) => {
-    return athleteService.findOne({
-        where: {id}
-    });
+    constructor(){}
+
+    findById(id){
+        return db.athlete.findOne({
+            where: {id}
+        });
+    }
+
+    findAll(){
+        return db.athlete.findAll();    
+    }
+
+    insert(athlete){
+        return db.athlete.create(athlete);    
+    }
+
+    update(athlete){
+        return db.athlete.update(athlete, {where : {id : athlete.id}}, { multi: true });    
+    }
 }
-
-athleteService.prototype.findAll = _ => {
-    return athleteService.findAll();    
-}
-
-athleteService.prototype.insert = athlete => {
-    return athleteService.create(athlete);    
-}
-
-athleteService.prototype.update = athlete => {
-    return athleteService.update(athlete, {where : {id : athlete.id}}, { multi: true });    
-}
-
-module.exports = athleteService;
+module.exports = new AthleteService();

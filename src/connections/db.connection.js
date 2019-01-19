@@ -27,12 +27,14 @@ const {
             operatorsAliases: false,
         });
     }
-
+    
     defineEntitys(){
         this.user = require('../models/user.model')(this.instance, Sequelize);
         this.plane = require('../models/plane.model')(this.instance, Sequelize);
         this.pilot = require('../models/pilot.model')(this.instance, Sequelize);
         this.takeoff = require('../models/takeoff.model')(this.instance, Sequelize, [this.plane, this.pilot]);
+        this.modality = require('../models/modality.model')(this.instance, Sequelize);
+        this.athlete = require('../models/athlete.model')(this.instance, Sequelize, [this.modality]);
     }
 
     syncTables(){

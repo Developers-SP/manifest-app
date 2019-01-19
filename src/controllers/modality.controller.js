@@ -1,14 +1,11 @@
 const modalityService = require('../services/modality.service')
-, httpStatus = require('http-status-codes')
-, ModalityModel = require('../models/modality.model');
+, httpStatus = require('http-status-codes');
 
 class ModalityController {
-    constructor() { 
-        modalityService.sync();
-    }
+    constructor() {}
 
     async findById(req, res) {
-        await modalityService.prototype.findById(req.params.id)
+        await modalityService.findById(req.params.id)
             .then(modality => {
                 res.status(httpStatus.OK).send(modality);
             }).catch((err) => {
@@ -17,7 +14,7 @@ class ModalityController {
     }
 
     async findAll(req, res) {
-        await modalityService.prototype.findAll()
+        await modalityService.findAll()
             .then(modalitys => {
                 res.status(httpStatus.OK).send(modalitys);
             }).catch((err) => {
@@ -26,7 +23,7 @@ class ModalityController {
     }
 
     async insert(req, res) {
-        await modalityService.prototype.insert(new ModalityModel(req.body))
+        await modalityService.insert(req.body)
             .then( _ => {
                 res.status(httpStatus.OK).send('Modalidade incluido com sucesso');
             }).catch((err) => {
@@ -35,7 +32,7 @@ class ModalityController {
     }
 
     async update(req, res) {
-        await modalityService.prototype.update(new ModalityModel(req.body))
+        await modalityService.update(req.body)
             .then( _ => {
                 res.status(httpStatus.OK).send('Modalidade atualizado com sucesso');
             }).catch((err) => {

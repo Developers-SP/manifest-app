@@ -1,27 +1,27 @@
-const db = require('../connections/db.connection')
-, ModalityModel = require('../models/modality.model');
+const db = require('../connections/db.connection');
 
-const modalityService = db.instance
-    .define('modality',
-        new ModalityModel().defineEntityStructure()
-    );
+class ModalityService{
 
-modalityService.prototype.findById = (id) => {
-    return modalityService.findOne({
-        where: {id}
-    });
+    constructor(){}
+
+    findById(id){
+        return db.modality.findOne({
+            where: {id}
+        });
+    }
+    
+    findAll(){
+        return db.modality.findAll();    
+    }
+    
+    insert(modality){
+        return db.modality.create(modality);    
+    }
+    
+    update(modality){
+        return db.modality.update(modality, {where : {id : modality.id}}, { multi: true });    
+    }
+
 }
 
-modalityService.prototype.findAll = _ => {
-    return modalityService.findAll();    
-}
-
-modalityService.prototype.insert = modality => {
-    return modalityService.create(modality);    
-}
-
-modalityService.prototype.update = modality => {
-    return modalityService.update(modality, {where : {id : modality.id}}, { multi: true });    
-}
-
-module.exports = modalityService;
+module.exports = new ModalityService();

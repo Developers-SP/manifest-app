@@ -1,14 +1,10 @@
 const athleteService = require('../services/athlete.service')
-, httpStatus = require('http-status-codes')
-, AthleteModel = require('../models/athlete.model');
+, httpStatus = require('http-status-codes');
 
 class AthleteController {
-    constructor() { 
-        athleteService.sync();
-    }
 
     async findById(req, res) {
-        await athleteService.prototype.findById(req.params.id)
+        await athleteService.findById(req.params.id)
             .then(athlete => {
                 res.status(httpStatus.OK).send(athlete);
             }).catch((err) => {
@@ -17,7 +13,7 @@ class AthleteController {
     }
 
     async findAll(req, res) {
-        await athleteService.prototype.findAll()
+        await athleteService.findAll()
             .then(athleties => {
                 res.status(httpStatus.OK).send(athleties);
             }).catch((err) => {
@@ -26,7 +22,7 @@ class AthleteController {
     }
 
     async insert(req, res) {
-        await athleteService.prototype.insert(new AthleteModel(req.body))
+        await athleteService.insert(req.body)
             .then( _ => {
                 res.status(httpStatus.OK).send('Atleta incluido com sucesso');
             }).catch((err) => {
@@ -35,7 +31,7 @@ class AthleteController {
     }
 
     async update(req, res) {
-        await athleteService.prototype.update(new AthleteModel(req.body))
+        await athleteService.update(req.body)
             .then( _ => {
                 res.status(httpStatus.OK).send('Atleta atualizado com sucesso');
             }).catch((err) => {
