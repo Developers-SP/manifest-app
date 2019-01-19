@@ -1,27 +1,29 @@
-const db = require('../connections/db.connection')
-, PilotModel = require('../models/pilot.model');
+const db = require('../connections/db.connection');
 
-const pilotService = db.instance
-    .define('pilot',
-        new PilotModel().defineEntityStructure()
-    );
+class PilotService{
 
-pilotService.prototype.findByRegistry = (registry) => {
-    return pilotService.findOne({
-        where: {registry}
-    });
+    constructor(){}
+
+    findByRegistry(registry){
+        return db.pilot.findOne({
+            where: {registry}
+        });
+    }
+    
+    findAll(){
+        return db.pilot.findAll();    
+    }
+    
+    insert(pilot){
+        return db.pilot.create(pilot);    
+    }
+    
+    update(pilot){
+        return db.pilot.update(pilot, {where : {id : pilot.id}}, { multi: true });    
+    }
+
 }
 
-pilotService.prototype.findAll = _ => {
-    return pilotService.findAll();    
-}
 
-pilotService.prototype.insert = pilot => {
-    return pilotService.create(pilot);    
-}
 
-pilotService.prototype.update = pilot => {
-    return pilotService.update(pilot, {where : {id : pilot.id}}, { multi: true });    
-}
-
-module.exports = pilotService;
+module.exports = new PilotService;

@@ -12,18 +12,21 @@ const {
     , db_dialect
   } = require('../environments');
 
-class DbConnection {
+  const db = {};
 
-    constructor(){
-        this.instance = new Sequelize(db_name, db_user, db_pass, {
+        instance = new Sequelize(db_name, db_user, db_pass, {
             host: db_host,
             dialect: db_dialect,
             operatorsAliases: false,
         });
-    }
-    
-    testConnection () {
-        return this.db.authenticate();
-    }    
-}
-module.exports = new DbConnection();
+   
+        db.Sequelize = Sequelize;
+        db.instance = instance;
+
+        db.user = require('../models/user.model')(instance, Sequelize);
+        db.plane = require('../models/plane.model')(instance, Sequelize);
+        db.pilot = require('../models/pilot.model')(instance, Sequelize);
+
+        db.instance.sync();
+
+module.exports = db;

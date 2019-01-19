@@ -1,14 +1,11 @@
 const pilotService = require('../services/pilot.service')
-, httpStatus = require('http-status-codes')
-, PilotModel = require('../models/pilot.model');
+, httpStatus = require('http-status-codes');
 
 class PilotController {
-    constructor() { 
-        pilotService.sync();
-    }
+    constructor() {}
 
     async findByRegistry(req, res) {
-        await pilotService.prototype.findByRegistry(req.params.registry)
+        await pilotService.findByRegistry(req.params.registry)
             .then(pilot => {
                 res.status(httpStatus.OK).send(pilot);
             }).catch((err) => {
@@ -18,7 +15,7 @@ class PilotController {
 
 
     async findAll(req, res) {
-        await pilotService.prototype.findAll()
+        await pilotService.findAll()
             .then(pilots => {
                 res.status(httpStatus.OK).send(pilots);
             }).catch((err) => {
@@ -27,7 +24,7 @@ class PilotController {
     }
 
     async insert(req, res) {
-        await pilotService.prototype.insert(new PilotModel(req.body))
+        await pilotService.insert(req.body)
             .then( _ => {
                 res.status(httpStatus.OK).send('Piloto incluido com sucesso');
             }).catch((err) => {
@@ -36,7 +33,7 @@ class PilotController {
     }
 
     async update(req, res) {
-        await pilotService.prototype.update(new PilotModel(req.body))
+        await pilotService.update(req.body)
             .then( _ => {
                 res.status(httpStatus.OK).send('Piloto atualizado com sucesso');
             }).catch((err) => {
@@ -44,5 +41,4 @@ class PilotController {
             });
     }
 }
-  
 module.exports = new PilotController();

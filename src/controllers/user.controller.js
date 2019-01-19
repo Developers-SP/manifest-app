@@ -1,19 +1,15 @@
 const userService = require('../services/user.service')
 , httpStatus = require('http-status-codes')
-, UserModel = require('../models/user.model')
 , crypt = require('../utils/crypt');
 
 class userController {
-    constructor() { 
-        userService.sync();
-    }
+    constructor() {}
   
-    async login(req, res) {
-       await userService.prototype.findByEmail(req.params.email)
+     async login(req, res) {
+        await userService.findByEmail(req.body.email)
             .then(user => {
                 crypt.password(req.body.password).
                     then(passwordCrypt =>{
-                        console.log('aaaa ' + passwordCrypt)
                         if(user != undefined && user.password == passwordCrypt){
                             res.status(httpStatus.OK).send(user);
                         }else{
@@ -29,7 +25,7 @@ class userController {
     }
 
     async findAll(req, res) {
-        await userService.prototype.findAll()
+        await userService.findAll()
             .then(users => {
                 res.status(httpStatus.OK).send(users);
             }).catch((err) => {
@@ -38,7 +34,7 @@ class userController {
     }
 
     async insert(req, res) {
-        await userService.prototype.insert(new UserModel(req.body))
+        await userService.insert(req.body)
             .then( _ => {
                 res.status(httpStatus.OK).send('Usuário incluido com sucesso');
             }).catch((err) => {
@@ -47,7 +43,7 @@ class userController {
     }
 
     async update(req, res) {
-        await userService.prototype.update(new UserModel(req.body))
+        await userService.update(req.body)
             .then( _ => {
                 res.status(httpStatus.OK).send('Usuário atualizado com sucesso');
             }).catch((err) => {
@@ -55,5 +51,4 @@ class userController {
             });
     }
 }
-  
 module.exports = new userController();

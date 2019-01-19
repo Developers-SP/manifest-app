@@ -1,27 +1,25 @@
-const db = require('../connections/db.connection')
-, PlaneModel = require('../models/plane.model');
+const db = require('../connections/db.connection');
 
-const planeService = db.instance
-    .define('plane',
-        new PlaneModel().defineEntityStructure()
-    );
+class PlaneService{
+    constructor(){}
 
-planeService.prototype.findByPrefix = (prefix) => {
-    return planeService.findOne({
-        where: {prefix}
-    });
+    findByPrefix(prefix){
+        return db.plane.findOne({
+            where: {prefix}
+        });
+    }
+    
+    findAll(){
+        return db.plane.findAll();    
+    }
+    
+    insert(plane){
+        return db.plane.create(plane);    
+    }
+    
+    update(plane){
+        return db.plane.update(plane, {where : {id : plane.id}}, { multi: true });    
+    }
 }
 
-planeService.prototype.findAll = _ => {
-    return planeService.findAll();    
-}
-
-planeService.prototype.insert = plane => {
-    return planeService.create(plane);    
-}
-
-planeService.prototype.update = plane => {
-    return planeService.update(plane, {where : {id : plane.id}}, { multi: true });    
-}
-
-module.exports = planeService;
+module.exports = new PlaneService;

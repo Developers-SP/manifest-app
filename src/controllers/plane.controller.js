@@ -1,14 +1,11 @@
 const planeService = require('../services/plane.service')
-, httpStatus = require('http-status-codes')
-, PlaneModel = require('../models/plane.model');
+, httpStatus = require('http-status-codes');
 
 class PlaneController {
-    constructor() { 
-        planeService.sync();
-    }
+    constructor() {}
 
     async findByPrefix(req, res) {
-        await planeService.prototype.findByPrefix(req.params.prefix)
+        await planeService.findByPrefix(req.params.prefix)
             .then(plane => {
                 res.status(httpStatus.OK).send(plane);
             }).catch((err) => {
@@ -18,7 +15,7 @@ class PlaneController {
     }
 
     async findAll(req, res) {
-        await planeService.prototype.findAll()
+        await planeService.findAll()
             .then(planes => {
                 res.status(httpStatus.OK).send(planes);
             }).catch((err) => {
@@ -27,7 +24,7 @@ class PlaneController {
     }
 
     async insert(req, res) {
-        await planeService.prototype.insert(new PlaneModel(req.body))
+        await planeService.insert(req.body)
             .then( _ => {
                 res.status(httpStatus.OK).send('Avião incluido com sucesso');
             }).catch((err) => {
@@ -36,7 +33,7 @@ class PlaneController {
     }
 
     async update(req, res) {
-        await planeService.prototype.update(new PlaneModel(req.body))
+        await planeService.update(req.body)
             .then( _ => {
                 res.status(httpStatus.OK).send('Avião atualizado com sucesso');
             }).catch((err) => {
