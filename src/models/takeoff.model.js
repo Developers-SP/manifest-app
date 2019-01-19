@@ -1,33 +1,15 @@
-const validation = require('../utils/field.validation')
-, Sequelize = require('sequelize');
+module.exports = (sequelize, Sequelize, relationship) => {
+	const TakeOff = sequelize.define('takeoff', {
+        id: {
+            type: Sequelize.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        }
+    });
 
-class TakeoffModel {
-    constructor(takeoff){
-        console.log(takeoff);
-        this.id = validation.undefinedOrHimself(takeoff, "id");
-        this.planeId = validation.undefinedOrHimself(takeoff, "planeId");
-        this.pilotId = validation.undefinedOrHimself(takeoff, "pilotId");
-        this.time = validation.undefinedOrHimself(takeoff, "time");
-    }
+    relationship.forEach(element => {
+        TakeOff.belongsTo(element);
+    });
 
-    defineEntityStructure(){
-        return {
-            id: {
-                type: Sequelize.INTEGER,
-                primaryKey: true,
-                autoIncrement: true
-            },
-            planeId: {
-                type: Sequelize.INTEGER,
-                allowNull: false,
-                references: { model: "planes", key: "id" } 
-            }, 
-            pilotId: {
-                type: Sequelize.INTEGER,
-                allowNull: false,
-                references: { model: "pilots", key: "id" } 
-            }
-        };
-    }
+	return TakeOff;
 }
-module.exports = TakeoffModel;

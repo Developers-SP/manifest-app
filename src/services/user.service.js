@@ -4,7 +4,8 @@ const db = require('../connections/db.connection')
 class UserService{
 
     constructor(){
-        db.user.beforeCreate(function(user, options) {
+        
+        db.instance.beforeCreate(function(user, options) {
             return crypt.password(user.password)
                 .then(success => {
                     user.password = success;

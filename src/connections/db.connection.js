@@ -12,21 +12,36 @@ const {
     , db_dialect
   } = require('../environments');
 
-  const db = {};
+  class DbConnection{
 
-        instance = new Sequelize(db_name, db_user, db_pass, {
+    constructor(){
+        this.createConnection();
+        this.defineEntitys();
+        this.syncTables();
+    }
+
+    createConnection(){
+        this.instance = new Sequelize(db_name, db_user, db_pass, {
             host: db_host,
             dialect: db_dialect,
             operatorsAliases: false,
         });
-   
-        db.Sequelize = Sequelize;
-        db.instance = instance;
+        this.db = {};
+        this.db.Sequelize = Sequelize;
+        this.db.instance = this.instance;
+    }
 
-        db.user = require('../models/user.model')(instance, Sequelize);
-        db.plane = require('../models/plane.model')(instance, Sequelize);
-        db.pilot = require('../models/pilot.model')(instance, Sequelize);
+    defineEntitys(){
+        this.db.user = require('../models/user.model')(this.instance, Sequelize);
+        this.db.plane = require('../models/plane.model')(this.instance, Sequelize);
+        this.db.pilot = require('../models/pilot.model')(this.instance, Sequelize);
+        this.db.takeoff = require('../models/takeoff.model')(this.instance, Sequelize, [this.db.plane, this.db.pilot]);
+    }
 
-        db.instance.sync();
+    syncTables(){
+        this.db.instance.sync();
+    }
 
-module.exports = db;
+  }
+
+module.exports = new DbConnection();

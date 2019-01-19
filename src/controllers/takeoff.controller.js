@@ -1,14 +1,12 @@
 const takeoffService = require('../services/takeoff.service')
-, httpStatus = require('http-status-codes')
-, TakeoffModel = require('../models/takeoff.model');
+, httpStatus = require('http-status-codes');
 
 class TakeoffController {
     constructor() { 
-        takeoffService.sync();
     }
 
     async findById(req, res) {
-        await takeoffService.prototype.findById(req.params.id)
+        await takeoffService.findById(req.params.id)
             .then(manifest => {
                 res.status(httpStatus.OK).send(manifest);
             }).catch((err) => {
@@ -18,7 +16,7 @@ class TakeoffController {
 
 
     async findAll(req, res) {
-        await takeoffService.prototype.findAll()
+        await takeoffService.findAll()
             .then(manifests => {
                 res.status(httpStatus.OK).send(manifests);
             }).catch((err) => {
@@ -27,7 +25,7 @@ class TakeoffController {
     }
 
     async insert(req, res) {
-        await takeoffService.prototype.insert(new TakeoffModel(req.body))
+        await takeoffService.insert(req.body)
             .then( _ => {
                 res.status(httpStatus.OK).send('decolagem incluido com sucesso');
             }).catch((err) => {
@@ -36,7 +34,7 @@ class TakeoffController {
     }
 
     async update(req, res) {
-        await takeoffService.prototype.update(new TakeoffModel(req.body))
+        await takeoffService.update(req.body)
             .then( _ => {
                 res.status(httpStatus.OK).send('decolagem atualizada com sucesso');
             }).catch((err) => {

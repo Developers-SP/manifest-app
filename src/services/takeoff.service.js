@@ -1,26 +1,25 @@
-const db = require('../connections/db.connection')
-, TakeoffModel = require('../models/takeoff.model');
+const db = require('../connections/db.connection');
 
-const takeOffService = db.instance
-    .define('takeoff',
-        new TakeoffModel().defineEntityStructure());
+class TakeOffService{
+    constructor(){}
 
-takeOffService.prototype.findById = (id) => {
-    return takeOffService.findOne({
-        where: {id}
-    });
+    findById(id){
+        return db.takeoff.findOne({
+            where: {id}
+        });
+    }
+    
+    findAll(){
+        return db.takeoff.findAll();    
+    }
+    
+    insert(takeoff){
+        return db.takeoff.create(takeoff);    
+    }
+    
+    update(takeoff){
+        return db.takeoff.update(takeoff, {where : {id : takeoff.id}}, { multi: true });    
+    }
 }
 
-takeOffService.prototype.findAll = _ => {
-    return takeOffService.findAll();    
-}
-
-takeOffService.prototype.insert = takeoff => {
-    return takeOffService.create(takeoff);    
-}
-
-takeOffService.prototype.update = takeoff => {
-    return takeOffService.update(takeoff, {where : {id : takeoff.id}}, { multi: true });    
-}
-
-module.exports = takeOffService;
+module.exports = new TakeOffService;
