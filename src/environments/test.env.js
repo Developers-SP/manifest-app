@@ -5,7 +5,7 @@ module.exports = {
     , db_name: 'semnome'
     , db_host: 'localhost'
     , db_user: 'root'
-    , db_pass: 'password'
+    , db_pass: 'senha!ADM'
     , db_port: 0000
     , db_dialect: 'mysql'
   };

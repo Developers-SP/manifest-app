@@ -5,7 +5,9 @@
   "scripts": {
     "start": "npx nodemon ./src/app mode=dev",
     "test": "npx mocha ./spec/**/*.spec.js",
-    "lint": "npx eslint ./"
+    "lint": "npx eslint ./",
+    "seed:undo": "npx sequelize db:seed:undo:all",
+    "seed": "npx sequelize db:seed:all"
   },
   "dependencies": {
     "body-parser": "^1.18.3",

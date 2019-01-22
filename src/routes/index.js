@@ -3,7 +3,8 @@ const userRoute = require('./user.route')
 , planeRoute = require('./plane.route')
 , takeoffRoute = require('./takeoff.route')
 , modalityRoute = require('./modality.route')
-, athleteRoute = require('./athlete.route');
+, athleteRoute = require('./athlete.route')
+, spaceRoute = require('./space.route');
 
 
 
@@ -14,6 +15,7 @@ module.exports = (app) => {
   app.use('/takeoff', takeoffRoute);
   app.use('/modality', modalityRoute);
   app.use('/athlete', athleteRoute);
+  app.use('/space', spaceRoute);
 
 
 };

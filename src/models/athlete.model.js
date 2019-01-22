@@ -1,4 +1,4 @@
-module.exports = (sequelize, Sequelize, relationship) => {
+module.exports = (sequelize, Sequelize) => {
 	const Athlete = sequelize.define('athlete', {
         id: {
             type: Sequelize.INTEGER,
@@ -22,10 +22,5 @@ module.exports = (sequelize, Sequelize, relationship) => {
             allowNull: false
         }
     });
-    
-    relationship.forEach(element => {
-        Athlete.belongsTo(element);
-    });
-
 	return Athlete;
 }
