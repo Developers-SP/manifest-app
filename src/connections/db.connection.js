@@ -37,6 +37,8 @@ const {
         this.modality = require('../models/modality.model')(this.instance, Sequelize);
         this.athlete = require('../models/athlete.model')(this.instance, Sequelize);
         this.space = require('../models/space.model')(this.instance, Sequelize);
+        this.equipment = require('../models/equipment.model')(this.instance, Sequelize);
+
     }
 
     createRelationships(){
@@ -47,6 +49,8 @@ const {
         this.space.belongsTo(this.athlete, {as: 'athlete'});
         this.space.belongsTo(this.athlete, {as: 'protester'});
         this.space.belongsTo(this.modality);
+        this.space.belongsTo(this.equipment);
+
 
     }
 
