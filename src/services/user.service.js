@@ -34,6 +34,10 @@ class UserService{
     update(user){
         return db.user.update(user, {where : {id : user.id}}, { multi: true });    
     }
+    
+    delete(email){
+        return db.user.destroy({where: {email}});    
+    }
 }
 
 module.exports = new UserService();

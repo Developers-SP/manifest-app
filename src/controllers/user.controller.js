@@ -50,5 +50,14 @@ class userController {
                 res.status(httpStatus.SERVICE_UNAVAILABLE).send(err);
             });
     }
+
+    async delete(req, res) {
+        await userService.delete(req.body.email)
+            .then( _ => {
+                res.status(httpStatus.OK).send('Usuário excluido com sucesso');
+            }).catch((err) => {
+                res.status(httpStatus.SERVICE_UNAVAILABLE).send(err);
+            });
+    }
 }
 module.exports = new userController();
