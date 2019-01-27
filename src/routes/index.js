@@ -5,8 +5,9 @@ const userRoute = require('./user.route')
 , modalityRoute = require('./modality.route')
 , athleteRoute = require('./athlete.route')
 , spaceRoute = require('./space.route')
-, equipmentRoute = require('./equipment.route');
-
+, equipmentRoute = require('./equipment.route')
+, orderRoute = require('./order.route')
+, paymentTypeRoute = require('./payment.type.route');
 
 
 module.exports = (app) => {
@@ -18,4 +19,6 @@ module.exports = (app) => {
   app.use('/athlete', athleteRoute);
   app.use('/space', spaceRoute);
   app.use('/equipment', equipmentRoute);
+  app.use('/order', orderRoute);
+  app.use('/payment-type', paymentTypeRoute);
 };
