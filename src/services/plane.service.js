@@ -20,6 +20,10 @@ class PlaneService{
     update(plane){
         return db.plane.update(plane, {where : {id : plane.id}}, { multi: true });    
     }
+
+    delete(id){
+        return db.plane.destroy({where: {id}});    
+    }
 }
 
 module.exports = new PlaneService;

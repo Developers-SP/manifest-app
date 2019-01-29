@@ -22,6 +22,9 @@ class ModalityService{
         return db.modality.update(modality, {where : {id : modality.id}}, { multi: true });    
     }
 
+    delete(id){
+        return db.modality.destroy({where: {id}});    
+    }
 }
 
 module.exports = new ModalityService();

@@ -21,5 +21,9 @@ class EquipmentService{
     update(equipment){
         return db.equipment.update(equipment, {where : {id : equipment.id}}, { multi: true });    
     }
+
+    delete(id){
+        return db.equipment.destroy({where: {id}});    
+    }
 }
 module.exports = new EquipmentService();

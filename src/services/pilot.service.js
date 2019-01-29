@@ -21,6 +21,10 @@ class PilotService{
     update(pilot){
         return db.pilot.update(pilot, {where : {id : pilot.id}}, { multi: true });    
     }
+
+    delete(id){
+        return db.pilot.destroy({where: {id}});    
+    }
 }
 
 module.exports = new PilotService;

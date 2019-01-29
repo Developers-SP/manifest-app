@@ -24,8 +24,7 @@ class SpaceController {
     async insert(req, res) {
         await spaceService.insert(req.body)
             .then( jump => {
-                jump.addAthlete(req.body.athletes);
-                res.status(httpStatus.OK).send('Atleta incluido com sucesso');
+                res.status(httpStatus.OK).send('Vaga incluido com sucesso');
             }).catch((err) => {
                 res.status(httpStatus.SERVICE_UNAVAILABLE).send(err);
             });
@@ -34,7 +33,16 @@ class SpaceController {
     async update(req, res) {
         await spaceService.update(req.body)
             .then( _ => {
-                res.status(httpStatus.OK).send('Atleta atualizado com sucesso');
+                res.status(httpStatus.OK).send('Vaga atualizado com sucesso');
+            }).catch((err) => {
+                res.status(httpStatus.SERVICE_UNAVAILABLE).send(err);
+            });
+    }
+
+    async delete(req, res) {
+        await spaceService.delete(req.body.id)
+            .then( _ => {
+                res.status(httpStatus.OK).send('Vaga excluida com sucesso');
             }).catch((err) => {
                 res.status(httpStatus.SERVICE_UNAVAILABLE).send(err);
             });

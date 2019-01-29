@@ -12,6 +12,15 @@ module.exports = (sequelize, Sequelize) => {
         paidout: {
             type: Sequelize.FLOAT,
             allowNull: false
+        },
+        orderId: {
+            type: Sequelize.INTEGER,
+            onDelete: 'RESTRICT',
+            allowNull: false,
+            references: { 
+              key: 'id',
+              model: 'orders' 
+            }
         }   
     });
 	return PaymentType;

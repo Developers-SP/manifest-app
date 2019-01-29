@@ -21,5 +21,9 @@ class AthleteService{
     update(athlete){
         return db.athlete.update(athlete, {where : {id : athlete.id}}, { multi: true });    
     }
+
+    delete(id){
+        return db.athlete.destroy({where: {id}});    
+    }
 }
 module.exports = new AthleteService();

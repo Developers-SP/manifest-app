@@ -40,5 +40,14 @@ class PilotController {
                 res.status(httpStatus.SERVICE_UNAVAILABLE).send(err);
             });
     }
+
+    async delete(req, res) {
+        await pilotService.delete(req.body.id)
+            .then( _ => {
+                res.status(httpStatus.OK).send('Piloto excluido com sucesso');
+            }).catch((err) => {
+                res.status(httpStatus.SERVICE_UNAVAILABLE).send(err);
+            });
+    }
 }
 module.exports = new PilotController();

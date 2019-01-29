@@ -25,7 +25,7 @@ class ModalityController {
     async insert(req, res) {
         await modalityService.insert(req.body)
             .then( _ => {
-                res.status(httpStatus.OK).send('Modalidade incluido com sucesso');
+                res.status(httpStatus.OK).send('Modalidade incluida com sucesso');
             }).catch((err) => {
                 res.status(httpStatus.SERVICE_UNAVAILABLE).send(err);
             });
@@ -34,11 +34,20 @@ class ModalityController {
     async update(req, res) {
         await modalityService.update(req.body)
             .then( _ => {
-                res.status(httpStatus.OK).send('Modalidade atualizado com sucesso');
+                res.status(httpStatus.OK).send('Modalidade atualizada com sucesso');
             }).catch((err) => {
                 res.status(httpStatus.SERVICE_UNAVAILABLE).send(err);
             });
     }
+
+    async delete(req, res) {
+        await modalityService.delete(req.body.id)
+            .then( _ => {
+                res.status(httpStatus.OK).send('Modalidade excluida com sucesso');
+            }).catch((err) => {
+                res.status(httpStatus.SERVICE_UNAVAILABLE).send(err);
+            });
+    }  
 }
   
 module.exports = new ModalityController();

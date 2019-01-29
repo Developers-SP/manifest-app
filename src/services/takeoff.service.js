@@ -20,6 +20,10 @@ class TakeOffService{
     update(takeoff){
         return db.takeoff.update(takeoff, {where : {id : takeoff.id}}, { multi: true });    
     }
+
+    delete(id){
+        return db.takeoff.destroy({where: {id}});    
+    }
 }
 
 module.exports = new TakeOffService;

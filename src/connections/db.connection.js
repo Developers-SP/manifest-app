@@ -17,7 +17,6 @@ const {
     constructor(){
         this.createConnection();
         this.defineEntitys();
-        this.createRelationships();
         this.syncTables();
     }
 
@@ -41,20 +40,6 @@ const {
         this.order = require('../models/order.model')(this.instance, Sequelize);
         this.payment = require('../models/payment.type.model')(this.instance, Sequelize);
 
-    }
-
-    createRelationships(){
-        this.takeoff.belongsTo(this.plane);
-        this.takeoff.belongsTo(this.pilot);
-
-        this.space.belongsTo(this.takeoff, entityUtil.foreignKeyNotNull());
-        this.space.belongsTo(this.athlete, entityUtil.foreignKeyNotNullAndAliasAs('athlete'));
-        this.space.belongsTo(this.athlete, entityUtil.foreignKeyNotNullAndAliasAs('protester'));
-        this.space.belongsTo(this.modality, entityUtil.foreignKeyNotNull());
-        this.space.belongsTo(this.equipment, entityUtil.foreignKeyNotNull());
-        this.space.belongsTo(this.order, entityUtil.foreignKeyNotNull());
-        this.order.hasMany(this.payment, entityUtil.foreignKeyNotNull());
-        this.payment.belongsTo(this.order);
     }
 
     syncTables(){

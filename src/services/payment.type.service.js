@@ -21,5 +21,9 @@ class PaymentService{
     update(payment){
         return db.payment.update(payment, {where : {id : payment.id}}, { multi: true });    
     }
+
+    delete(id){
+        return db.payment.destroy({where: {id}});    
+    }
 }
 module.exports = new PaymentService();

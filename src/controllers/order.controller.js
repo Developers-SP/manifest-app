@@ -24,7 +24,7 @@ class OrderController {
     async insert(req, res) {
         await orderService.insert(req.body)
             .then( _ => {
-                res.status(httpStatus.OK).send('ordem incluido com sucesso');
+                res.status(httpStatus.OK).send('ordem incluida com sucesso');
             }).catch((err) => {
                 res.status(httpStatus.SERVICE_UNAVAILABLE).send(err);
             });
@@ -33,11 +33,20 @@ class OrderController {
     async update(req, res) {
         await orderService.update(req.body)
             .then( _ => {
-                res.status(httpStatus.OK).send('ordem atualizado com sucesso');
+                res.status(httpStatus.OK).send('ordem atualizada com sucesso');
             }).catch((err) => {
                 res.status(httpStatus.SERVICE_UNAVAILABLE).send(err);
             });
     }
+
+    async delete(req, res) {
+        await orderService.delete(req.body.id)
+            .then( _ => {
+                res.status(httpStatus.OK).send('ordem excluida com sucesso');
+            }).catch((err) => {
+                res.status(httpStatus.SERVICE_UNAVAILABLE).send(err);
+            });
+    }   
 }
   
 module.exports = new OrderController();

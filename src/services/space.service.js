@@ -28,5 +28,9 @@ class SpaceService{
     update(space){
         return db.space.update(space, {where : {id : space.id}}, { multi: true });    
     }
+
+    delete(id){
+        return db.space.destroy({where: {id}});    
+    }
 }
 module.exports = new SpaceService();

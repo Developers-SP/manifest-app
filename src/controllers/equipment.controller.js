@@ -5,8 +5,8 @@ class EquipmentController {
 
     async findById(req, res) {
         await equipmentService.findById(req.params.id)
-            .then(athlete => {
-                res.status(httpStatus.OK).send(athlete);
+            .then(equipment => {
+                res.status(httpStatus.OK).send(equipment);
             }).catch((err) => {
                 res.status(httpStatus.SERVICE_UNAVAILABLE).send(err);
             });
@@ -14,8 +14,8 @@ class EquipmentController {
 
     async findAll(req, res) {
         await equipmentService.findAll()
-            .then(athleties => {
-                res.status(httpStatus.OK).send(athleties);
+            .then(equipments => {
+                res.status(httpStatus.OK).send(equipments);
             }).catch((err) => {
                 res.status(httpStatus.SERVICE_UNAVAILABLE).send(err);
             });
@@ -24,7 +24,7 @@ class EquipmentController {
     async insert(req, res) {
         await equipmentService.insert(req.body)
             .then( _ => {
-                res.status(httpStatus.OK).send('Atleta incluido com sucesso');
+                res.status(httpStatus.OK).send('Equipamento incluido com sucesso');
             }).catch((err) => {
                 res.status(httpStatus.SERVICE_UNAVAILABLE).send(err);
             });
@@ -33,11 +33,20 @@ class EquipmentController {
     async update(req, res) {
         await equipmentService.update(req.body)
             .then( _ => {
-                res.status(httpStatus.OK).send('Atleta atualizado com sucesso');
+                res.status(httpStatus.OK).send('Equipamento atualizado com sucesso');
             }).catch((err) => {
                 res.status(httpStatus.SERVICE_UNAVAILABLE).send(err);
             });
     }
+
+    async delete(req, res) {
+        await equipmentService.delete(req.body.id)
+            .then( _ => {
+                res.status(httpStatus.OK).send('Equipamento excluida com sucesso');
+            }).catch((err) => {
+                res.status(httpStatus.SERVICE_UNAVAILABLE).send(err);
+            });
+    }  
 }
   
 module.exports = new EquipmentController();

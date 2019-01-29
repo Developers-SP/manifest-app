@@ -38,6 +38,15 @@ class PaymentTypeController {
                 res.status(httpStatus.SERVICE_UNAVAILABLE).send(err);
             });
     }
+
+    async delete(req, res) {
+        await paymentTypeService.delete(req.body.id)
+            .then( _ => {
+                res.status(httpStatus.OK).send('tipo de pagamento excluido com sucesso');
+            }).catch((err) => {
+                res.status(httpStatus.SERVICE_UNAVAILABLE).send(err);
+            });
+    }   
 }
   
 module.exports = new PaymentTypeController();

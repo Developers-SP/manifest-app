@@ -41,6 +41,15 @@ class TakeoffController {
                 res.status(httpStatus.SERVICE_UNAVAILABLE).send(err);
             });
     }
+
+    async delete(req, res) {
+        await takeoffService.delete(req.body.id)
+            .then( _ => {
+                res.status(httpStatus.OK).send('decolagem excluida com sucesso');
+            }).catch((err) => {
+                res.status(httpStatus.SERVICE_UNAVAILABLE).send(err);
+            });
+    }
 }
   
 module.exports = new TakeoffController();

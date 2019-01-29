@@ -40,6 +40,15 @@ class PlaneController {
                 res.status(httpStatus.SERVICE_UNAVAILABLE).send(err);
             });
     }
+
+    async delete(req, res) {
+        await planeService.delete(req.body.id)
+            .then( _ => {
+                res.status(httpStatus.OK).send('Piloto excluido com sucesso');
+            }).catch((err) => {
+                res.status(httpStatus.SERVICE_UNAVAILABLE).send(err);
+            });
+    }
 }
   
 module.exports = new PlaneController();
