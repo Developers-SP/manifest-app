@@ -1,10 +1,10 @@
-const paymentTypeService = require('../services/payment.type.service')
+const paymentService = require('../services/payment.service')
 , httpStatus = require('http-status-codes');
 
 class PaymentTypeController {
 
     async findById(req, res) {
-        await paymentTypeService.findById(req.params.id)
+        await paymentService.findById(req.params.id)
             .then(paymentType => {
                 res.status(httpStatus.OK).send(paymentType);
             }).catch((err) => {
@@ -13,7 +13,7 @@ class PaymentTypeController {
     }
 
     async findAll(req, res) {
-        await paymentTypeService.findAll()
+        await paymentService.findAll()
             .then(paymentsType => {
                 res.status(httpStatus.OK).send(paymentsType);
             }).catch((err) => {
@@ -22,7 +22,7 @@ class PaymentTypeController {
     }
 
     async insert(req, res) {
-        await paymentTypeService.insert(req.body)
+        await paymentService.insert(req.body)
             .then( _ => {
                 res.status(httpStatus.OK).send('tipo de pagamento incluido com sucesso');
             }).catch((err) => {
@@ -31,7 +31,7 @@ class PaymentTypeController {
     }
 
     async update(req, res) {
-        await paymentTypeService.update(req.body)
+        await paymentService.update(req.body)
             .then( _ => {
                 res.status(httpStatus.OK).send('tipo de pagamento atualizado com sucesso');
             }).catch((err) => {
@@ -40,7 +40,7 @@ class PaymentTypeController {
     }
 
     async delete(req, res) {
-        await paymentTypeService.delete(req.body.id)
+        await paymentService.delete(req.body.id)
             .then( _ => {
                 res.status(httpStatus.OK).send('tipo de pagamento excluido com sucesso');
             }).catch((err) => {

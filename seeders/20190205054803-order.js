@@ -1,10 +1,10 @@
 'use strict';
 
-const UserModel = require('../src/models/user.model');
+const OrderModel = require('../src/models/order.model');
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    const model = UserModel
+    const model = OrderModel
       .defineEntityStructure(
         queryInterface.sequelize
       );
@@ -13,10 +13,10 @@ module.exports = {
       .sync()
       .then(
         _ => queryInterface
-          .bulkInsert('users', [
+          .bulkInsert('orders', [
             {
-              email: 'teste@teste.com',
-              password: 'abc',
+              status: 'opened',
+              total: 875.45,
               createdAt: new Date(),
               updatedAt: new Date()
             }
@@ -25,6 +25,7 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('users');
+    return queryInterface.dropTable('orders');
   }
 };
+

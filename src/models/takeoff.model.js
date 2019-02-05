@@ -1,31 +1,39 @@
-module.exports = (sequelize, Sequelize) => {
-	const TakeOff = sequelize.define('takeoff', {
-        id: {
-            type: Sequelize.INTEGER,
-            primaryKey: true,
-            autoIncrement: true
-        },
-        status: {
-            type: Sequelize.BOOLEAN
-        },
-        planeId: {
-            type: Sequelize.INTEGER,
-            onDelete: 'RESTRICT',
-            allowNull: false,
-            references: { 
-              key: 'id',
-              model: 'planes' 
-            }
-        },
-        pilotId: {
-            type: Sequelize.INTEGER,
-            onDelete: 'RESTRICT',
-            allowNull: false,
-            references: { 
-              key: 'id',
-              model: 'pilots' 
-            }
+const Sequelize = require('sequelize')
+  , defaultFields = require('./default.model');
+
+class TakeOffModel {
+
+  static get structure() {
+    return {
+      ...defaultFields,
+      status: {
+        type: Sequelize.BOOLEAN
+      },
+      planeId: {
+        type: Sequelize.INTEGER,
+        onDelete: 'RESTRICT',
+        allowNull: false,
+        references: {
+          key: 'id',
+          model: 'planes'
         }
-    });
-	return TakeOff;
+      },
+      pilotId: {
+        type: Sequelize.INTEGER,
+        onDelete: 'RESTRICT',
+        allowNull: false,
+        references: {
+          key: 'id',
+          model: 'pilots'
+        }
+      }
+    };
+  }
+
+  static defineEntityStructure(sequelize) {
+    return sequelize
+      .define('takeoff', this.structure);
+  }
 }
+
+module.exports = TakeOffModel;

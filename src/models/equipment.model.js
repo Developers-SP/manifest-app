@@ -1,26 +1,31 @@
-module.exports = (sequelize, Sequelize) => {
-	const Equipment = sequelize.define('equipment', {
-        id: {
-            type: Sequelize.INTEGER,
-            primaryKey: true,
-            autoIncrement: true
-        },
-        name: {
-            type: Sequelize.STRING,
-            allowNull: false
-        },
-        pdStorm: {
-            type: Sequelize.STRING,
-            allowNull: false
-        },
-        quanty: {
-            type: Sequelize.STRING,
-            allowNull: false
-        },
-        lastManutention: {
-            type: Sequelize.DATE,
-            allowNull: false
-        }
-    });
-	return Equipment;
+const Sequelize = require('sequelize')
+  , defaultFields = require('./default.model');
+
+
+class EquipmentModel {
+
+  static get structure() {
+    return {
+      ...defaultFields,
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      pdStorm: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      lastManutention: {
+        type: Sequelize.DATE,
+        allowNull: false
+      }
+    };
+  }
+
+  static defineEntityStructure(sequelize) {
+    return sequelize
+      .define('equipment', this.structure);
+  }
 }
+
+module.exports = EquipmentModel;

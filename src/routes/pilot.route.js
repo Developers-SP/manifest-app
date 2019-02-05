@@ -1,11 +1,12 @@
-const urlController = require('../controllers/pilot.controller')
+const controller = require('../controllers/pilot.controller')
   , express = require('express')
   , router = express.Router();
 
-router.get('/find-by-registry/:registry', urlController.findByRegistry);
-router.get('/find-all', urlController.findAll);
-router.post('/insert', urlController.insert);
-router.put('/update', urlController.update);
-router.delete('/delete', urlController.delete);
+router.delete('/:registry', controller.delete);
+router.get('/:registry', controller.findByRegistry);
+router.put('/:registry', controller.update);
+
+router.post('/', controller.insert);
+router.get('/', controller.findAll);
 
 module.exports = router;

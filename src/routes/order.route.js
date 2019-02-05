@@ -2,10 +2,11 @@ const urlController = require('../controllers/order.controller')
   , express = require('express')
   , router = express.Router();
 
-router.get('/find-by-id/:id', urlController.findById);
-router.get('/find-all', urlController.findAll);
-router.post('/insert', urlController.insert);
-router.put('/update', urlController.update);
-router.delete('/delete', urlController.delete);
+router.delete('/:id', urlController.delete);
+router.get('/:id', urlController.findById);
+router.put('/:id', urlController.update);
+
+router.get('/', urlController.findAll);
+router.post('/', urlController.insert);
 
 module.exports = router;

@@ -1,35 +1,35 @@
 const Sequelize = require('sequelize')
   , defaultFields = require('./default.model');
 
-class PlaneModel {
+class DocumentModel {
 
   static get structure() {
     return {
       ...defaultFields,
-      prefix: {
-        type: Sequelize.STRING,
-        unique: true,
-        allowNull: false
-      },
-      name: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      model: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      amountOfPeople: {
+      athleteId: {
         type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
         allowNull: false,
+        references: {
+          key: 'id',
+          model: 'athletes'
+        }
+      },
+      type: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      number: {
+        type: Sequelize.STRING,
+        allowNull: false
       }
     };
   }
 
   static defineEntityStructure(sequelize) {
     return sequelize
-      .define('plane', this.structure);
+      .define('document', this.structure);
   }
 }
 
-module.exports = PlaneModel;
+module.exports = DocumentModel;

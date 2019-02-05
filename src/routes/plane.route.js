@@ -1,11 +1,12 @@
-const urlController = require('../controllers/plane.controller')
+const controller = require('../controllers/plane.controller')
   , express = require('express')
   , router = express.Router();
 
-router.get('/find-by-prefix/:prefix', urlController.findByPrefix);
-router.get('/find-all', urlController.findAll);
-router.post('/insert', urlController.insert);
-router.put('/update', urlController.update);
-router.delete('/delete', urlController.delete);
+router.delete('/:prefix', controller.delete);
+router.get('/:prefix', controller.findByPrefix);
+router.put('/:prefix', controller.update);
+
+router.post('/', controller.insert);
+router.get('/', controller.findAll);
 
 module.exports = router;

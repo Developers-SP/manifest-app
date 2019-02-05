@@ -1,11 +1,12 @@
-const urlController = require('../controllers/takeoff.controller')
+const controller = require('../controllers/takeoff.controller')
   , express = require('express')
   , router = express.Router();
 
-router.get('/find-by-id/:id', urlController.findById);
-router.get('/find-all', urlController.findAll);
-router.post('/insert', urlController.insert);
-router.put('/update', urlController.update);
-router.delete('/delete', urlController.delete);
+router.delete('/:id', controller.delete);
+router.get('/:id', controller.findById);
+router.put('/:id', controller.update);
+
+router.post('/', controller.insert);
+router.get('/', controller.findAll);
 
 module.exports = router;

@@ -1,51 +1,79 @@
-const Sequelize = require('sequelize')
-, entityUtil = require('../utils/entity');
+const Sequelize = require('sequelize');
 const {
-    mode
-    , host
-    , port
-    , db_name
-    , db_host
-    , db_user
-    , db_pass
-    , db_por
-    , db_dialect
-  } = require('../environments');
+  db_name
+  , db_host
+  , db_user
+  , db_pass
+  , db_dialect
+} = require('../environments');
 
-  class DbConnection{
+const AthleteModel = require('../models/athlete.model')
+  , DocumentModel = require('../models/document.model')
+  , EquipmentModel = require('../models/equipment.model')
+  , ModalityModel = require('../models/modality.model')
+  , OrderModel = require('../models/order.model')
+  , PaymentModel = require('../models/payment.model')
+  , PilotModel = require('../models/pilot.model')
+  , PlaneModel = require('../models/plane.model')
+  , SeatModel = require('../models/seat.model')
+  , TakeOffModel = require('../models/takeoff.model')
+  , UserModel = require('../models/user.model');
+  
+class DbConnection {
 
-    constructor(){
-        this.createConnection();
-        this.defineEntitys();
-        this.syncTables();
-    }
-
-    createConnection(){
-        this.instance = new Sequelize(db_name, db_user, db_pass, {
-            host: db_host,
-            dialect: db_dialect,
-            operatorsAliases: false,
-        });
-    }
-    
-    defineEntitys(){
-        this.user = require('../models/user.model')(this.instance, Sequelize);
-        this.plane = require('../models/plane.model')(this.instance, Sequelize);
-        this.pilot = require('../models/pilot.model')(this.instance, Sequelize);
-        this.takeoff = require('../models/takeoff.model')(this.instance, Sequelize);
-        this.modality = require('../models/modality.model')(this.instance, Sequelize);
-        this.athlete = require('../models/athlete.model')(this.instance, Sequelize);
-        this.space = require('../models/space.model')(this.instance, Sequelize);
-        this.equipment = require('../models/equipment.model')(this.instance, Sequelize);
-        this.order = require('../models/order.model')(this.instance, Sequelize);
-        this.payment = require('../models/payment.type.model')(this.instance, Sequelize);
-
-    }
-
-    syncTables(){
-        this.instance.sync();
-    }
-
+  constructor() {
+    this.createConnection();
+    this.defineEntitys();
+    this.syncTables();
   }
+
+  createConnection() {
+    this.instance = new Sequelize(db_name, db_user, db_pass, {
+      operatorsAliases: false,
+      dialect: db_dialect,
+      host: db_host
+    });
+  }
+
+  defineEntitys() {
+    this.athlete = AthleteModel
+      .defineEntityStructure(this.instance);
+
+    this.document = DocumentModel
+      .defineEntityStructure(this.instance);
+
+    this.equipment = EquipmentModel
+      .defineEntityStructure(this.instance);
+
+    this.modality = ModalityModel
+      .defineEntityStructure(this.instance);
+
+    this.pilot = PilotModel
+      .defineEntityStructure(this.instance);
+
+    this.plane = PlaneModel
+      .defineEntityStructure(this.instance);
+
+    this.order = OrderModel
+      .defineEntityStructure(this.instance);
+
+    this.payment = PaymentModel
+      .defineEntityStructure(this.instance);
+
+    this.takeoff = TakeOffModel
+      .defineEntityStructure(this.instance);
+
+    this.seat = SeatModel
+      .defineEntityStructure(this.instance);
+
+    this.user = UserModel
+      .defineEntityStructure(this.instance);
+  }
+
+  syncTables() {
+    this.instance.sync();
+  }
+
+}
 
 module.exports = new DbConnection();

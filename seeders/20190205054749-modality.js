@@ -1,10 +1,10 @@
 'use strict';
 
-const UserModel = require('../src/models/user.model');
+const ModalityModel = require('../src/models/modality.model');
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    const model = UserModel
+    const model = ModalityModel
       .defineEntityStructure(
         queryInterface.sequelize
       );
@@ -13,10 +13,9 @@ module.exports = {
       .sync()
       .then(
         _ => queryInterface
-          .bulkInsert('users', [
+          .bulkInsert('modalities', [
             {
-              email: 'teste@teste.com',
-              password: 'abc',
+              name: 'SOLO',
               createdAt: new Date(),
               updatedAt: new Date()
             }
@@ -25,6 +24,7 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('users');
+    return queryInterface.dropTable('modalities');
   }
 };
+
